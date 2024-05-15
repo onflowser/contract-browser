@@ -39,7 +39,7 @@ export function getNetworkConfig(network){
 export function useNetworkForAddress(address){
   let network = "testnet"
   if (address?.indexOf(".find")>-1){
-    network="mainnet"  
+    network="mainnet"
   } else{
   network = getNetworkFromAddress(address)
   }
@@ -73,12 +73,12 @@ export async function useNetwork(desiredNetwork: string = "mainnet"){
 //     }
 //     setConfig(getNetworkConfig[network], setValue)
 //   },[network, value])
-  
-  
+
+
 //   return value
 // }
 
-export function getNetwork(): string  {
+export function useCurrentNetwork(): string  {
   const [network, setNetwork] = useState<string|null>(null)
 
   useEffect(() => {

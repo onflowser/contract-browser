@@ -10,7 +10,7 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
     href: string
     title: string
-    type: string
+    type: "sub" | "parent"
   }[]
 }
 
@@ -26,24 +26,19 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
       {...props}
     >
       {items.map((item) => (
-        !item.type || item.type !== 'coming-soon' ? <Link
+        <Link
           key={item.href}
           href={item.href}
           className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "justify-start",
-            pathname === item.href
-              ? "bg-muted hover:bg-muted"
-              : "hover:bg-transparent hover:underline"
+              buttonVariants({ variant: "ghost" }),
+              "justify-start",
+              pathname === item.href
+                  ? "bg-muted hover:bg-muted"
+                  : "hover:bg-transparent hover:underline"
           )}
         >
           {item.title}
         </Link>
-        :
-        <Button disabled={true} variant="ghost" key={item.title}
-          className="justify-start">
-          {item.title}<sup className="text-xs text-muted-foreground">WIP</sup>
-        </Button>
       ))}
     </nav>
   )

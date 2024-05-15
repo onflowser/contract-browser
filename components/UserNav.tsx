@@ -28,7 +28,7 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useAccount } from '@/hooks/useAccount'
 import ConnectionLight from "./ui/ConnectionLight"
 import FlowLogo from "./ui/FlowLogo"
-import { 
+import {
   Avatar,
   AvatarImage,
   AvatarFallback
@@ -38,15 +38,15 @@ import { useSearchParams } from "next/navigation"
 import Loading from "./ui/Loading"
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
 import { Label } from "flowbite-react"
-import { getNetwork } from "@/hooks/useNetwork"
+import { useCurrentNetwork } from "@/hooks/useNetwork"
 
 
 export function UserNav() {
-  
+
   const user = useCurrentUser()
-  const hookNetwork = getNetwork()
+  const hookNetwork = useCurrentNetwork()
   const [network, setNetwork] = useState(hookNetwork || 'mainnet')
-  
+
   function changeNetwork(desiredNetwork: string) {
     fcl.unauthenticate()
     fcl.config(getNetworkConfig(desiredNetwork))
@@ -101,9 +101,9 @@ export default function AccountNav({user, network, changeNetwork}) {
     <>
     <DropdownMenuTrigger asChild>
     <Button variant="outline">
-      <ConnectionLight status="online"/><span className="w-2"></span> 
+      <ConnectionLight status="online"/><span className="w-2"></span>
       <span className="hidden md:inline-block">{ account.storage && account.storage?.find ? account.storage?.find.name : user?.addr }</span>
-      {account.storage && account.storage?.find ? 
+      {account.storage && account.storage?.find ?
       <Avatar className="h-6 w-6 me-2 md:hidden">
         <AvatarImage src={account.storage?.find.avatar} alt={account.storage?.find.name} />
       </Avatar>
@@ -120,7 +120,7 @@ export default function AccountNav({user, network, changeNetwork}) {
             {user?.addr}
           </p>
 
-          {account.storage && account.storage?.find && 
+          {account.storage && account.storage?.find &&
           <>
             <div className="flex pt-2 pb-1 items-center">
             <Avatar className="h-6 w-6 me-2">
@@ -180,10 +180,10 @@ export default function AccountNav({user, network, changeNetwork}) {
       </DropdownMenuSub>
 
       <DropdownMenuSeparator />
-    
+
       <DropdownMenuGroup>
         <DropdownMenuItem>
-          Settings    
+          Settings
           <DropdownMenuShortcut>
           <Cog className="h-4 w-4 text-muted-foreground" />
           </DropdownMenuShortcut>
@@ -208,7 +208,7 @@ export default function AccountNav({user, network, changeNetwork}) {
     <>
     <DropdownMenuTrigger asChild>
       <Button variant="outline">
-        <ConnectionLight status="online"/><span className="w-2"></span> 
+        <ConnectionLight status="online"/><span className="w-2"></span>
         <span className="hidden md:inline-block"><Loading className="h-5 w-5 m-0"/></span>
       </Button>
     </DropdownMenuTrigger>

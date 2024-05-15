@@ -14,7 +14,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { VerifiedBadge } from "@/components/ui/VerifiedBadge"
 
 export default function ContractPageLayout({ children }) {
-  
+
   const { contractId } = useParams()
   const user = useCurrentUser()
   const network = getNetworkFromAddress(getContractAddress(contractId))
@@ -42,7 +42,7 @@ export default function ContractPageLayout({ children }) {
     },
     {
       title: "Interact",
-      type: "coming-soon",
+      type: "parent",
       href:"/" + contractId + "/interact",
     }
   ]
@@ -60,8 +60,8 @@ export default function ContractPageLayout({ children }) {
           <AddressBadge className="text-sm h-6" address={getContractAddress(contractId)} copyBadge={true}/>
 
           {/* <p className="text-xs">
-            getContractAddress(contractId) === user?.addr ? 
-            "You own this contract, so you can update it." : 
+            getContractAddress(contractId) === user?.addr ?
+            "You own this contract, so you can update it." :
             `Login with the deploying account to modify this contract.`
           </p> */ }
 
