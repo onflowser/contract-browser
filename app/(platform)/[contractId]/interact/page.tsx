@@ -13,10 +13,14 @@ export default function InteractPage() {
         )
     }
 
+    const baseUrl = process.env.NODE_ENV === "development" 
+        ? "http://localhost:3000"
+        : "https://interact.flowser.dev";
+
     return (
         <iframe
-            className="w-full h-[80vh]"
-            src={`http://localhost:3000/${currentNetwork}`}
+            className="w-full h-[80vh] rounded-md"
+            src={`${baseUrl}/${currentNetwork}`}
         />
     )
 }
